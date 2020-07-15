@@ -97,7 +97,7 @@ router.post('/approve',(req,res)=>{
     })
 })
 router.post('/reject',(req,res)=>{
-    console.log("aa gayi");
+
     const form=req.body.filename;
     const email=req.user.email;
     application.findOne({filename: form},(err,app)=>{

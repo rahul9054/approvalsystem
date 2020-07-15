@@ -196,10 +196,6 @@
   <% include ../partials/scripts %>
 </body>
 <script>
-
-
-
-
   function cancel(c) {
     date= document.getElementById(document.getElementById(c).getAttribute('value')+'_date'); 
     description=document.getElementById(document.getElementById(c).getAttribute('value')+'_description');
@@ -233,7 +229,6 @@ function forward(c) {
     c.style.display = "none";
   }
 }
-
 var i=0;
   for(i=2;i<=3;i++){
     document.getElementById(i).style.display = "none";
@@ -247,23 +242,18 @@ var i=0;
   }
   }
   function send(id) { 
-    console.log(document.getElementById(id).getAttribute('type'))
+  
    
     document.getElementById("sent").style.display="none";
     document.getElementById("enter").style.display="none";
-    console.log(document.getElementById('sent'));
-    console.log(document.getElementById('enter'))
-
-
+ 
     filename= document.getElementById(id).getAttribute('value')
-
     value=(document.getElementById(filename+'_email'));
     
     value=value.value;
     //email validation
-    
-    if(!(value.indexOf("@") > 0 && value.indexOf(".") > 0 && value.indexOf("@")-value.indexOf(".") > 0)){
-    
+    if(!(value.indexOf("@") > 0 && value.indexOf(".")>0 && value.indexOf(".") - value.indexOf("@")>0) ){
+  
       document.getElementById('enter').style.display="block";
       document.getElementById('enter').innerHTML=`<div class="alert alert-danger alert-dismissible fade show"  role="alert">
             Input should be email
@@ -271,6 +261,7 @@ var i=0;
               <span aria-hidden="true">&times;</span>
             </button>
           </div>`;
+          document.getElementById(filename+'_email').value="";
       return ;
     }
     if(document.getElementById(id).getAttribute('type')==value){
@@ -281,6 +272,7 @@ var i=0;
               <span aria-hidden="true">&times;</span>
             </button>
           </div>`;
+          document.getElementById(filename+'_email').value="";
       return ;
     }
     if(value==""||value==undefined){
@@ -291,13 +283,13 @@ var i=0;
               <span aria-hidden="true">&times;</span>
             </button>
           </div>`;
+          document.getElementById(filename+'_email').value="";
       return ;
     }
     email=document.getElementById(filename+'_email');
  
     
       $.ajax({
-
               type:'post',
               url:'./ajax/send',
               data: {
@@ -307,7 +299,6 @@ var i=0;
               },
               
               success:function(response){
-                console.log("aa gayi")
                 document.getElementById('sent').style.display="block";
                 document.getElementById(filename+'_email').value="";
                 document.getElementById('sent').innerHTML=` <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -340,7 +331,6 @@ var i=0;
         }
       })
 }
-
 function reject(id){
    var filename= document.getElementById(id).getAttribute('value');
       $.ajax({
@@ -360,15 +350,10 @@ function reject(id){
         }
       })
   }
-
-
 function Detail(id) {
-
 date= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_date'); 
-
 description=document.getElementById(document.getElementById(id).getAttribute('value')+'_l_description');
 table= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_table');
-
 if (table.style.display === "none" || description.style.display === "none"|| date.style.display === "none") {
   date.style.display = "block";
   table.style.display = "block";
@@ -378,10 +363,8 @@ date.style.display = "none";
   table.style.display = "none";
   description.style.display = "none";
 }
-
 filename= document.getElementById(id).getAttribute('value');
   $.ajax({
-
           type:'POST',
           url:'./ajax',
           data: {
@@ -400,7 +383,6 @@ filename= document.getElementById(id).getAttribute('value');
             var tableHeader='';
             tableHeader+='Descrption : '+response.descrption;
             table.innerHTML=tableHeader;
-
             id=filename+'_l_table';
             var table = document.getElementById(id);
             var tableHeader='';
@@ -421,8 +403,6 @@ filename= document.getElementById(id).getAttribute('value');
               m=response.Pending_from.length;
             }
             for(var i=0;i<(m);i++){
-
-
               tableHtml +='<tr>'+'<th scope="row">'+response.Pending_from[i]+'</th>'+
              '<td>'+' </td>'+'<td>'+'Pending...'+'</td>'+'<td>'+'<div class="d-flex align-items-center">'
               +'<div>'+'</div>'+'</div>'+' </td>'+'</tr>';
@@ -453,28 +433,14 @@ filename= document.getElementById(id).getAttribute('value');
               +'<div>'+'</div>'+'</div>'+' </td>'+'</tr>';
              
             }
-
             table.innerHTML=tableHeader+tableHtml+'</tbody>'+'</table>';
           }
   });
-
           
         
 }
-
-
-
-
-
-
-
-
-
-
-
  
   function Status(id) {
-
     date= document.getElementById(document.getElementById(id).getAttribute('value')+'_date'); 
     description=document.getElementById(document.getElementById(id).getAttribute('value')+'_description');
     table= document.getElementById(document.getElementById(id).getAttribute('value')+'_table');
@@ -491,7 +457,6 @@ filename= document.getElementById(id).getAttribute('value');
    
     filename= document.getElementById(id).getAttribute('value')
       $.ajax({
-
               type:'POST',
               url:'./ajax',
               data: {
@@ -511,7 +476,6 @@ filename= document.getElementById(id).getAttribute('value');
                 var tableHeader='';
                 tableHeader+='Descrption : '+response.descrption;
                 table.innerHTML=tableHeader;
-
                 id=filename+'_table';
                 var table = document.getElementById(id);
                 var tableHeader='';
@@ -532,8 +496,6 @@ filename= document.getElementById(id).getAttribute('value');
                   m=response.Pending_from.length;
                 }
                 for(var i=0;i<(m);i++){
-
-
                   tableHtml +='<tr>'+'<th scope="row">'+response.Pending_from[i]+'</th>'+
                  '<td>'+' </td>'+'<td>'+'Pending...'+'</td>'+'<td>'+'<div class="d-flex align-items-center">'
                   +'<div>'+'</div>'+'</div>'+' </td>'+'</tr>';
@@ -566,14 +528,15 @@ filename= document.getElementById(id).getAttribute('value');
                   +'<div>'+'</div>'+'</div>'+' </td>'+'</tr>';
                  
                 }
-
                 table.innerHTML=tableHeader+tableHtml+'</tbody>'+'</table>';
               }
       });
-
               
             
   }
-
 </script>
 
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
