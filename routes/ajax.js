@@ -36,21 +36,20 @@ router.post('/',(req,res)=>{
 })
 
 router.post('/send',(req,res)=>{
-    
+    console.log("send");
     const form=req.body.filename;
     const email=req.body.email;
     
-    if(email==""|| email==undefined){
-        req.flash('error_msg', 'Email-id of Recipient must be there');
-        res.send();
+    if(email==""|| email==undefined){ 
+        res.send(null);
     }
     else{
     
     application.findOne({filename: form},(err,app)=>{
         if(!err){
             if(app ==null|| app==undefined){
-                req.flash('error_msg', 'Application Not found');
-                res.redirect('./dashboard');
+                
+                res.send(null);
             }
             else{
                // const upadate={Pending_from: app.Pending_from.pull(email) }

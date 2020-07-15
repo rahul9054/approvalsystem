@@ -15,23 +15,37 @@
       <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0">
           <% include ../partials/messages %>
-          <div class="alert alert-danger alert-dismissible fade show" id="enter"style="display: none" role="alert">
+          <div id="enter" style="display: none">
+          <!-- <div class="alert alert-danger alert-dismissible fade show"  role="alert">
             Email-must be entered
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+          </div> -->
           </div>
-          <div class="alert alert-success alert-dismissible fade show" id="approve"style="display: none" role="alert">
+          <div id="sent"style="display: none">
+          <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Application sent..
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div> -->
+          </div>
+          <div id="approve"style="display: none">
+          <!-- <div class="alert alert-success alert-dismissible fade show"  role="alert">
             Application approved..
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+          </div> -->
           </div>
-          <div class="alert alert-danger alert-dismissible fade show" id="reject"style="display: none" role="alert">
+          <div id="reject"style="display: none">
+          <!-- <div class="alert alert-danger alert-dismissible fade show"  role="alert">
             Application Rejected..
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+          </div> -->
           </div>
           <!--First Div-->
           <div class="card shadow" id="1">
@@ -105,7 +119,7 @@
                       </div>
                     </div>
                     <div class="col text-right">
-                      <div  class="btn btn-sm btn-primary mb-3" id = "<%=files.created_total[l]%>_send" value="<%=files.created_total[l]%>" onclick="send(this.id)">Send</div>
+                      <div  class="btn btn-sm btn-primary mb-3" id = "<%=files.created_total[l]%>_send" value="<%=files.created_total[l]%>" onclick=" return send(this.id)">Send</div>
                       
                       <div  class="btn btn-sm btn-primary mb-3" id = "<%=files.created_total[l]%>_cance" value="<%=files.created_total[l]%>" onclick="cancel(this.id)">Cancel</div>
                     </div>                   
@@ -233,6 +247,10 @@ var i=0;
   }
   }
   function send(id) { 
+    document.getElementById("sent").style.display="none";
+    document.getElementById("enter").style.display="none";
+    console.log(document.getElementById('sent'));
+    console.log(document.getElementById('enter'))
 
 
     filename= document.getElementById(id).getAttribute('value')
@@ -242,7 +260,13 @@ var i=0;
 
     if(value==""||value==undefined){
       document.getElementById('enter').style.display="block";
-      return false;
+      document.getElementById('enter').innerHTML=`<div class="alert alert-danger alert-dismissible fade show"  role="alert">
+            Email-must be entered
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`;
+      return ;
     }
     email=document.getElementById(filename+'_email');
  
@@ -258,7 +282,15 @@ var i=0;
               },
               
               success:function(response){
-                
+                console.log("aa gayi")
+                document.getElementById('sent').style.display="block";
+                document.getElementById(filename+'_email').value="";
+                document.getElementById('sent').innerHTML=` <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Application sent..
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`
                 
                
               }
@@ -274,6 +306,12 @@ var i=0;
         },
         success:function(response){
           document.getElementById('approve').style.display="block";
+          document.getElementById('approve').innerHTML=` <div class="alert alert-success alert-dismissible fade show"  role="alert">
+            Application approved..
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`
         }
       })
 }
@@ -288,6 +326,12 @@ function reject(id){
         },
         success:function(response){
           document.getElementById('reject').style.display="block";
+          document.getElementById('reject').innerHTML=` <div class="alert alert-danger alert-dismissible fade show"  role="alert">
+            Application Rejected..
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>`
         }
       })
   }
