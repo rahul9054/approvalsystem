@@ -90,7 +90,13 @@ router.post('/dashboard',upload.single('myfile'),(req, res) => {
     if(req.body.email==""){
     req.flash('error_msg', 'Recipient need to be entered..');
     res.redirect('./dashboard');
-  }else{
+    }
+      else{
+         if(req.body.email==req.user.email){
+          req.flash('error_msg', 'Recipient need to be different from User..');
+          res.redirect('./dashboard');
+          }
+          else{
   const form=new application();
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -160,6 +166,7 @@ router.post('/dashboard',upload.single('myfile'),(req, res) => {
   })
 }
 }
+  }
 });  
 
 

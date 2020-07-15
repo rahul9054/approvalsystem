@@ -40,7 +40,7 @@ router.post('/send',(req,res)=>{
     const form=req.body.filename;
     const email=req.body.email;
     
-    if(email==""|| email==undefined){ 
+    if(email==""|| email==undefined||req.body.email==req.user.email){ 
         res.send(null);
     }
     else{
