@@ -262,7 +262,7 @@ var i=0;
     value=value.value;
     //email validation
     
-    if(!(value.indexOf("@") > 0||value.indexOf(".") > 0||value.indexOf("@")-value.indexOf("@") > 0)){
+    if(!(value.indexOf("@") > 0 && value.indexOf(".") > 0 && value.indexOf("@")-value.indexOf("@") > 0)){
     
       document.getElementById('enter').style.display="block";
       document.getElementById('enter').innerHTML=`<div class="alert alert-danger alert-dismissible fade show"  role="alert">
