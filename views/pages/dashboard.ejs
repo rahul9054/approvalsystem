@@ -313,6 +313,17 @@ var i=0;
       });
   }
   function approve(id){
+
+    date= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_date'); 
+description=document.getElementById(document.getElementById(id).getAttribute('value')+'_l_description');
+table= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_table');
+date.style.display = "none";
+  table.style.display = "none";
+  description.style.display = "none";
+  document.getElementById('approve').style.display="none";
+
+
+
    var filename= document.getElementById(id).getAttribute('value');
       $.ajax({
         type:'post',
@@ -332,6 +343,18 @@ var i=0;
       })
 }
 function reject(id){
+  date= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_date'); 
+description=document.getElementById(document.getElementById(id).getAttribute('value')+'_l_description');
+table= document.getElementById(document.getElementById(id).getAttribute('value')+'_l_table');
+date.style.display = "none";
+  table.style.display = "none";
+  description.style.display = "none";
+  document.getElementById('reject').style.display="none";
+
+
+
+
+
    var filename= document.getElementById(id).getAttribute('value');
       $.ajax({
         type:'post',
@@ -535,8 +558,3 @@ filename= document.getElementById(id).getAttribute('value');
             
   }
 </script>
-
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
